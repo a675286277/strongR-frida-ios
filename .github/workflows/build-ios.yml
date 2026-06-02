@@ -66,6 +66,7 @@ jobs:
       - name: Build frida for iOS arm64
         run: |
           mkdir build-ios-arm64
+          export IOS_CERTID=-
           cd build-ios-arm64
           ../frida/configure --host=ios-arm64
           make
