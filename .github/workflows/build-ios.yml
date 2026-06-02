@@ -38,7 +38,14 @@ jobs:
           echo "Building Frida $FRIDA_VERSION for iOS arm64"
           
           git clone --recurse-submodules https://github.com/frida/frida.git
+          cd frida
+          git checkout $FRIDA_VERSION
+          git submodule update --init --recursive
+          cd ..
           git clone https://github.com/Ylarod/Florida.git
+          cd Florida
+          git checkout $FRIDA_VERSION 2>/dev/null || echo "Florida $FRIDA_VERSION tag not found, using HEAD"
+          cd ..
           
           echo "Frida cloned, applying Florida patches..."
 
@@ -65,10 +72,10 @@ jobs:
 
       - name: Build frida for iOS arm64
         run: |
-          mkdir build-ios-arm64
           export IOS_CERTID=-
+          mkdir build-ios-arm64
           cd build-ios-arm64
-          ../frida/configure --host=ios-arm64
+          ../frida/configure --host=ios-arm64e
           make
           echo "=== Build completed ==="
 
