@@ -80,10 +80,12 @@ jobs:
           SERVER="build-ios-arm64/subprojects/frida-core/server/frida-server"
           INJECT="build-ios-arm64/subprojects/frida-core/inject/frida-inject"
           GADGET="build-ios-arm64/subprojects/frida-core/lib/gadget/frida-gadget.dylib"
+          AGENT="build-ios-arm64/subprojects/frida-core/lib/agent/frida-agent.dylib"
           
           [ -f "$SERVER" ] && cp "$SERVER" "output/frida-server-${FRIDA_VERSION}-ios-arm64" && echo "Found server"
           [ -f "$INJECT" ] && cp "$INJECT" "output/frida-inject-${FRIDA_VERSION}-ios-arm64" && echo "Found inject"
           [ -f "$GADGET" ] && cp "$GADGET" "output/frida-gadget-${FRIDA_VERSION}-ios-arm64.dylib" && echo "Found gadget"
+          [ -f "$AGENT" ] && cp "$AGENT" "output/frida-agent-${FRIDA_VERSION}-ios-arm64.dylib" && echo "Found agent"
           
           if [ -z "$(ls -A output 2>/dev/null)" ]; then
             echo "Standard paths empty, searching..."
